@@ -312,6 +312,11 @@ class TeamsListService
                 return new Result(EnumHttpCode::SUCCESS, array('Success'), 'Les membres ont bien été supprimé.');
             }
 
+            $errorMessage = implode(' ', $response);
+            if (str_contains($errorMessage, 'foreign key') || str_contains($errorMessage, '1451') || str_contains($errorMessage, '1452')) {
+                return new Result(EnumHttpCode::BAD_REQUEST, array('Suppression impossible: des données liées existent encore (contrainte de clé étrangère).'));
+            }
+
             return new Result(EnumHttpCode::BAD_REQUEST, array('Il n’y a eu aucune modification.'));
         } catch (PDOException $e) {
             $context["http_error_code"] = $e->getCode();
@@ -336,6 +341,11 @@ class TeamsListService
 
             if (sizeof($response) == 0) {
                 return new Result(EnumHttpCode::SUCCESS, array('Success'), 'Les équipes ont bien été supprimé.');
+            }
+
+            $errorMessage = implode(' ', $response);
+            if (str_contains($errorMessage, 'foreign key') || str_contains($errorMessage, '1451') || str_contains($errorMessage, '1452')) {
+                return new Result(EnumHttpCode::BAD_REQUEST, array('Suppression impossible: des données liées existent encore (contrainte de clé étrangère).'));
             }
 
             return new Result(EnumHttpCode::BAD_REQUEST, array('Une erreur est survenu lors de la suppression des équipes.'));

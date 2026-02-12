@@ -91,7 +91,7 @@ class SignUpTeamRepository extends Repository
                 $verifcationMember = $this->get_member_by_numero_da($team->members[$a]["numero_da"]);
                 if(sizeOf($verifcationMember) == 0){ //
                     //Insertion d'un membre dans la bd
-                    $sql = "INSERT INTO users (first_name, last_name, numero_da, role_id, picture_consent, activated, activation_token) VALUES (:first_name, :last_name, :numero_da, :role_id, :picture_consent, 0, :activation_token)";
+                    $sql = "INSERT INTO users (first_name, last_name, numero_da, role_id, picture_consent, hide_first_name, hide_last_name, hide_numero_da, activated, activation_token) VALUES (:first_name, :last_name, :numero_da, :role_id, :picture_consent, :hide_first_name, :hide_last_name, :hide_numero_da, 0, :activation_token)";
     
                     $req = $this->db->prepare($sql);
                     $req->execute(array(
@@ -100,15 +100,25 @@ class SignUpTeamRepository extends Repository
                         "numero_da" => $team->members[$a]['numero_da'],
                         "role_id" => 3,
                         "picture_consent" => $team->members[$a]['pictureConsent'],
+                        "hide_first_name" => (int)($team->members[$a]["hideFirstName"] ?? 0),
+                        "hide_last_name" => (int)($team->members[$a]["hideLastName"] ?? 0),
+                        "hide_numero_da" => (int)($team->members[$a]["hideNumeroDa"] ?? 0),
                         "activation_token" => $token[$a]
                     ));
                 }
                 //Permet de mettre à jour le token pour une nouvelle validation
                 else{
-                    $sql = "UPDATE users SET activation_token = :activation_token WHERE id = :id";
+                    $sql = "UPDATE users SET activation_token = :activation_token, picture_consent = :picture_consent, hide_first_name = :hide_first_name, hide_last_name = :hide_last_name, hide_numero_da = :hide_numero_da WHERE id = :id";
                     $req = $this->db->prepare($sql);
                     $req->execute(array(
+                        "hide_first_name" => (int)($team->members[$a]["hideFirstName"] ?? 0),
+                        "hide_last_name" => (int)($team->members[$a]["hideLastName"] ?? 0),
+                        "hide_numero_da" => (int)($team->members[$a]["hideNumeroDa"] ?? 0),
                         "activation_token" => $token[$a],
+                        "picture_consent" => $team->members[$a]['pictureConsent'],
+                        "hide_first_name" => (int)($team->members[$a]["hideFirstName"] ?? 0),
+                        "hide_last_name" => (int)($team->members[$a]["hideLastName"] ?? 0),
+                        "hide_numero_da" => (int)($team->members[$a]["hideNumeroDa"] ?? 0),
                         "id" => $verifcationMember['id']
                     ));
                 }

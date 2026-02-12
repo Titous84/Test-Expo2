@@ -225,7 +225,7 @@ class FormRepository extends Repository
      */
     public function get_all_survey(): array{
         try{
-        $sql = "SELECT id, name FROM survey ORDER BY id";
+        $sql = "SELECT id, name FROM evaluationgrids ORDER BY id";
         $req = $this->db->query($sql);
         return $req->fetchAll();}
         catch(Exception $exception){
@@ -242,7 +242,7 @@ class FormRepository extends Repository
     public function create_survey(string $name):Result
     {
         try{
-            $sql = "INSERT INTO survey (name) VALUES (:name);";
+            $sql = "INSERT INTO evaluationgrids (name) VALUES (:name);";
             $req = $this->db->prepare($sql);
 
             $req->execute(array(
@@ -273,7 +273,7 @@ class FormRepository extends Repository
                 "id" => $id
             ));
 
-            $sql = "DELETE from survey WHERE id = :id;";
+            $sql = "DELETE from evaluationgrids WHERE id = :id;";
             $req = $this->db->prepare($sql);
 
             $req->execute(array(
@@ -296,7 +296,7 @@ class FormRepository extends Repository
     public function update_survey(int $id, string $name, int $survey_id):Result
     {
         try{
-            $sql = "UPDATE survey SET survey.name = :name WHERE id = :id;";
+            $sql = "UPDATE evaluationgrids SET evaluationgrids.name = :name WHERE id = :id;";
             $req = $this->db->prepare($sql);
 
             $req->execute(array(

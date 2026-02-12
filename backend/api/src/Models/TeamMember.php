@@ -41,6 +41,21 @@ class TeamMember
     public $userActivated;
 
     /**
+     * @var int Masquage du prénom
+     */
+    public $hideFirstName;
+
+    /**
+     * @var int Masquage du nom
+     */
+    public $hideLastName;
+
+    /**
+     * @var int Masquage du numéro DA
+     */
+    public $hideNumeroDa;
+
+    /**
      * @var int|null ID de l'équipe
      */
     public $teamId;
@@ -72,6 +87,9 @@ class TeamMember
         $this->lastName = $teamJSON["last_name"];
         $this->pictureConsent = $teamJSON["picture_consent"];
         $this->userActivated = isset($teamJSON["users_activated"]) ? $teamJSON["users_activated"] : 1;
+        $this->hideFirstName = isset($teamJSON["hide_first_name"]) ? (int)$teamJSON["hide_first_name"] : 0;
+        $this->hideLastName = isset($teamJSON["hide_last_name"]) ? (int)$teamJSON["hide_last_name"] : 0;
+        $this->hideNumeroDa = isset($teamJSON["hide_numero_da"]) ? (int)$teamJSON["hide_numero_da"] : 0;
         $this->teamId = isset($teamJSON["team_id"]) ? $teamJSON["team_id"] : null;
         $this->email = isset($teamJSON["email"]) ? $teamJSON["email"] : null;
         $this->blacklisted = isset($teamJSON["blacklisted"]) ? $teamJSON["blacklisted"] : 0;

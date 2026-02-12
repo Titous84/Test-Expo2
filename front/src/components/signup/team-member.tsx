@@ -5,7 +5,7 @@ import React from 'react';
 import { ValidatorForm } from 'react-material-ui-form-validator'
 import TeamMember from '../../types/sign-up/team-member';
 import { MAX_LENGTH_FIRST_NAME, MAX_LENGTH_LAST_NAME } from '../../utils/constants';
-import { FormControl,FormControlLabel,FormLabel, Grid, Paper, Radio, RadioGroup } from '@mui/material';
+import { Checkbox, FormControl,FormControlLabel,FormLabel, Grid, Paper, Radio, RadioGroup } from '@mui/material';
 import styles from "./../../pages/ParticipantRegistration/ParticipantRegistrationPage.module.css";
 import { TextValidator } from 'react-material-ui-form-validator'
 import { INPUT_VARIANT } from '../../utils/muiConstants';
@@ -14,6 +14,7 @@ import { suffix } from '../../utils/utils';
 
 /**
  *  Composant membre de l'équipe
+ *  @author Nathan Reyes
  */
 interface TeamMemberFormProps{
     teamMember:TeamMember;
@@ -110,15 +111,38 @@ export default class TeamMemberForm extends React.Component<TeamMemberFormProps>
                                 name="controlled-radio-buttons-group"
                                 value={this.props.teamMember.pictureConsent}
                                 onChange={(event:any) => {
-
-                                    this.props.handleChangeTeamMember(this.props.number,"pictureConsent", event.target.value)
+                                    this.props.handleChangeTeamMember(this.props.number,"pictureConsent", Number(event.target.value))
                                 }}
                             >
-                                <FormControlLabel value={1} control={<Radio />} label={TEXTS.signup.pictureConsent.yes} />
-                                <FormControlLabel value={0} control={<Radio />} label={TEXTS.signup.pictureConsent.no} />
+                                <FormControlLabel value={1} control={<Radio />} label={TEXTS.signup.pictureConsent.publication} />
+                                <FormControlLabel value={2} control={<Radio />} label={TEXTS.signup.pictureConsent.internalOnly} />
+                                <FormControlLabel value={0} control={<Radio />} label={TEXTS.signup.pictureConsent.none} />
                             </RadioGroup>
                             </FormControl>
                         </Grid>
+                        <Grid item xs={12} md={12}>
+                            {/* Paramètres de confidentialité du participant. */}
+                            {/* @author Nathan Reyes */}
+                            <FormControl component="fieldset">
+                                <FormLabel>{TEXTS.signup.anonymity.title}</FormLabel>
+                                <FormControlLabel
+                                    control={<Checkbox checked={this.props.teamMember.hideFirstName} />}
+                                    label={TEXTS.signup.anonymity.hideFirstName}
+                                    onChange={(event:any) => this.props.handleChangeTeamMember(this.props.number,"hideFirstName", event.target.checked)}
+                                />
+                                <FormControlLabel
+                                    control={<Checkbox checked={this.props.teamMember.hideLastName} />}
+                                    label={TEXTS.signup.anonymity.hideLastName}
+                                    onChange={(event:any) => this.props.handleChangeTeamMember(this.props.number,"hideLastName", event.target.checked)}
+                                />
+                                <FormControlLabel
+                                    control={<Checkbox checked={this.props.teamMember.hideNumeroDa} />}
+                                    label={TEXTS.signup.anonymity.hideNumeroDa}
+                                    onChange={(event:any) => this.props.handleChangeTeamMember(this.props.number,"hideNumeroDa", event.target.checked)}
+                                />
+                            </FormControl>
+                        </Grid>
+
                     </Grid>
                 </Paper>
         );
