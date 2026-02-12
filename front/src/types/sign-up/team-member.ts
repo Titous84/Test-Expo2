@@ -1,6 +1,7 @@
 /**
  * Membre d'équipe.
  * Mathieu Sévégny
+ * @author Nathan Reyes
  */
 export default interface TeamMember{
     /**

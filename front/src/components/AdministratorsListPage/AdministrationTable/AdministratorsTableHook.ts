@@ -122,8 +122,11 @@ export default function useAdministratorsTableHook() {
 
     /**
      * Réinitialise les données de fin d'événement.
+     * @author Nathan Reyes
      */
     const resetEventData = () => {
+        // Déclenche l'état de chargement pour éviter les doubles soumissions.
+        // @author Nathan Reyes
         setIsResetLoading(true)
 
         UserService.resetEventData()

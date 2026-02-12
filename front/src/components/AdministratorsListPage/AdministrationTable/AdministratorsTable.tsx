@@ -9,6 +9,7 @@ import useAdministratorsTableHook from "./AdministratorsTableHook";
 /**
  * Tableau qui affiche la liste des administrateurs.
  * Les cellules sont modifiables directement dans le tableau.
+ * @author Nathan Reyes
  */
 export default function AdministratorsTable() {
     // *** Variables d'état ***
@@ -70,6 +71,8 @@ export default function AdministratorsTable() {
 
     return (
         <div data-testid="administratorsTable">
+            {/* Réinitialisation annuelle des données événementielles. */}
+            {/* @author Nathan Reyes */}
             <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
                 <Button
                     variant="contained"

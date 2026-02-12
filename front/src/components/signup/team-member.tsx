@@ -14,6 +14,7 @@ import { suffix } from '../../utils/utils';
 
 /**
  *  Composant membre de l'équipe
+ *  @author Nathan Reyes
  */
 interface TeamMemberFormProps{
     teamMember:TeamMember;
@@ -120,6 +121,8 @@ export default class TeamMemberForm extends React.Component<TeamMemberFormProps>
                             </FormControl>
                         </Grid>
                         <Grid item xs={12} md={12}>
+                            {/* Paramètres de confidentialité du participant. */}
+                            {/* @author Nathan Reyes */}
                             <FormControl component="fieldset">
                                 <FormLabel>{TEXTS.signup.anonymity.title}</FormLabel>
                                 <FormControlLabel

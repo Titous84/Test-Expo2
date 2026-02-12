@@ -898,6 +898,7 @@ class UserService
 
     /**
      * Réinitialise les données d'événement (inscriptions, évaluations, assignations).
+     * @author Nathan Reyes
      */
     public function reset_event_data(): Result
     {

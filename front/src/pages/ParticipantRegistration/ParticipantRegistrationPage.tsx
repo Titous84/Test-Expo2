@@ -103,6 +103,8 @@ export default class ParticipantRegistrationPage extends IPage<{}, ParticipantRe
                     {email:"", fullName:""}
                 ],
                 members:[
+                    // Initialisation des drapeaux de confidentialité par défaut.
+                    // @author Nathan Reyes
                     {numero_da:"",firstName:"",lastName:"",pictureConsent:0,hideFirstName:false,hideLastName:false,hideNumeroDa:false},
                     {numero_da:"",firstName:"",lastName:"",pictureConsent:0,hideFirstName:false,hideLastName:false,hideNumeroDa:false}
                 ]

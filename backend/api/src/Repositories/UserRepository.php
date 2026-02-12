@@ -1037,12 +1037,15 @@ class UserRepository extends Repository
     /**
      * Réinitialise les données opérationnelles d'une édition Expo-SAT.
      * Les comptes administrateurs et le référentiel (catégories/grilles) sont conservés.
+     * @author Nathan Reyes
      */
     public function reset_event_data(): bool
     {
         try {
             $this->db->beginTransaction();
 
+            // Désactive temporairement les contraintes FK pour permettre une purge complète et atomique.
+            // @author Nathan Reyes
             $this->db->exec("SET FOREIGN_KEY_CHECKS=0");
             $this->db->exec("DELETE FROM criteria_evaluation");
             $this->db->exec("DELETE FROM evaluation");

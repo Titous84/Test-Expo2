@@ -11,6 +11,7 @@ use Slim\Psr7\Response;
 
 /**
  * Réinitialise les données d'événement en conservant les comptes administrateurs.
+ * @author Nathan Reyes
  */
 class ResetEventDataAction
 {
@@ -23,6 +24,10 @@ class ResetEventDataAction
         $this->tokenService = $tokenService;
     }
 
+    /**
+     * Exécute la réinitialisation sécurisée des données de fin d'événement (accès Admin seulement).
+     * @author Nathan Reyes
+     */
     public function __invoke(Request $request, Response $response, array $args): ResponseInterface
     {
         $isUserPermitted = TokenUtils::is_user_in_permitted_roles($request, $this->tokenService, ["Admin"]);
