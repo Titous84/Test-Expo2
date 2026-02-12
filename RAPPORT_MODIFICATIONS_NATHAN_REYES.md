@@ -1,12 +1,11 @@
 # Rapport des modifications – Expo-SAT
 
 ## Auteur
+
 Nathan Reyes
 
-## Résumé global
-Ce rapport résume les changements fonctionnels déjà intégrés (inscriptions, base de données, administration) et la passe de documentation demandée (commentaires en français + balises `@author Nathan Reyes` sur les zones retouchées).
-
 ## 1) Inscriptions (confidentialité + consentements photo)
+
 - Ajout des champs de confidentialité des participants:
   - `hideFirstName`
   - `hideLastName`
@@ -18,11 +17,13 @@ Ce rapport résume les changements fonctionnels déjà intégrés (inscriptions,
 - Mise à jour des types et du formulaire d'inscription participants.
 
 ## 2) Backend / persistance
+
 - Enregistrement des nouveaux champs de confidentialité au moment de l'inscription des équipes.
 - Mise à jour des validations backend (consentement photo et booléens de confidentialité).
 - Masquage conditionnel des données personnelles dans les requêtes de listes d'équipes/membres.
 
 ## 3) Base de données
+
 - Renommage de la table logique `survey` vers `evaluationgrids` dans le SQL principal et les requêtes impactées.
 - Mise à jour des contraintes FK associées.
 - Ajout des colonnes SQL:
@@ -31,18 +32,22 @@ Ce rapport résume les changements fonctionnels déjà intégrés (inscriptions,
   - `hide_numero_da`
 
 ## 4) Administration (fin d'événement)
+
 - Ajout d'une route sécurisée admin: `POST /api/administrators/reset-event-data`.
 - Ajout d'un bouton côté front dans la gestion des administrateurs.
 - Ajout de la logique de réinitialisation transactionnelle côté backend pour nettoyer les données opérationnelles d'une édition.
 
 ## 5) Erreurs FK
+
 - Amélioration des messages retournés lors des suppressions bloquées par des contraintes de clés étrangères.
 
 ## 6) Documentation demandée
+
 - Ajout de commentaires en français dans les zones retouchées.
 - Ajout de la mention `@author Nathan Reyes` dans les blocs de code modifiés durant cette passe.
 
 ## Fichiers ajustés pour la passe "commentaires/auteur"
+
 - `backend/api/src/Actions/Administrators/ResetEventDataAction.php`
 - `backend/api/src/Repositories/UserRepository.php`
 - `backend/api/src/Services/UserService.php`
