@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import AdministratorCreationDialog from "../AdministratorCreationDialog/AdministratorCreationDialog";
 import AdministratorsTableToolbar from "./AdministratorsTableToolbar";
@@ -9,6 +9,7 @@ import useAdministratorsTableHook from "./AdministratorsTableHook";
 /**
  * Tableau qui affiche la liste des administrateurs.
  * Les cellules sont modifiables directement dans le tableau.
+ * @author Nathan Reyes
  */
 export default function AdministratorsTable() {
     // *** Variables d'état ***
@@ -33,7 +34,9 @@ export default function AdministratorsTable() {
         setIsConfirmationDialogOpen,
         getAllAdministrators,
         handleDeleteButtonClick,
-        deleteSelectedAdministrators
+        deleteSelectedAdministrators,
+        isResetLoading,
+        resetEventData
     } = useAdministratorsTableHook(); // Récupére les variables d'état et les méthodes dans le fichier séparé.
     
     // Quelles colonnes on veut afficher dans le tableau et sous quel nom.
@@ -90,6 +93,25 @@ export default function AdministratorsTable() {
                     setSelectedAdministratorsIds(newSelection.map(id => Number(id)))
                 }}
             />
+
+            {/* Réinitialisation annuelle des données événementielles. */}
+            {/* @author Nathan Reyes */}
+            <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
+                <Button
+                    variant="contained"
+                    color="warning"
+                    disabled={isResetLoading}
+                    onClick={() => {
+                        const confirmation = window.confirm("Êtes-vous certain de vouloir réinitialiser les données de l'événement? Cette action est irréversible.")
+                        if (confirmation) {
+                            resetEventData()
+                        }
+                    }}
+                >
+                    Réinitialiser les données de fin d'événement
+                </Button>
+            </Box>
+
 
             {/* Snackbar caché par défaut qui affiche les messages */}
             <TemporarySnackbar

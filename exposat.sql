@@ -222,15 +222,16 @@ CREATE TABLE `judge` (
   `id` int NOT NULL,
   `uuid` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci,
   `categories_id` int NOT NULL,
-  `users_id` int NOT NULL
+  `users_id` int NOT NULL,
+  `is_present_current_edition` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Déchargement des données de la table `judge`
 --
 
-INSERT INTO `judge` (`id`, `uuid`, `categories_id`, `users_id`) VALUES
-(34, '94097b1b-05b7-4c13-879d-69ad597846e9', 6, 782);
+INSERT INTO `judge` (`id`, `uuid`, `categories_id`, `users_id`, `is_present_current_edition`) VALUES
+(34, '94097b1b-05b7-4c13-879d-69ad597846e9', 6, 782, 1);
 
 -- --------------------------------------------------------
 
@@ -308,19 +309,19 @@ CREATE TABLE `site_component` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `survey`
+-- Structure de la table `evaluationgrids`
 --
 
-CREATE TABLE `survey` (
+CREATE TABLE `evaluationgrids` (
   `id` int NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
--- Déchargement des données de la table `survey`
+-- Déchargement des données de la table `evaluationgrids`
 --
 
-INSERT INTO `survey` (`id`, `name`) VALUES
+INSERT INTO `evaluationgrids` (`id`, `name`) VALUES
 (1, 'GrillePourTous');
 
 -- --------------------------------------------------------
@@ -408,6 +409,9 @@ CREATE TABLE `users` (
   `numero_da` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
   `picture` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
   `picture_consent` tinyint(1) NOT NULL DEFAULT '0',
+  `hide_first_name` tinyint(1) NOT NULL DEFAULT '0',
+  `hide_last_name` tinyint(1) NOT NULL DEFAULT '0',
+  `hide_numero_da` tinyint(1) NOT NULL DEFAULT '0',
   `reset_token` int DEFAULT NULL,
   `activation_token` varchar(36) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
   `activated` tinyint(1) NOT NULL DEFAULT '1',
@@ -419,11 +423,16 @@ CREATE TABLE `users` (
 -- Déchargement des données de la table `users`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `pwd`, `email`, `numero_da`, `picture`, `picture_consent`, `reset_token`, `activation_token`, `activated`, `blacklisted`, `role_id`) VALUES
-(1, 'le testeur', 'professionnel', 'test', '$2y$10$wNOJM7zdwWO2KoDZ3jSCKOXbTJnVUnHKlgrJ8sRdwAky/3FzwOiRW', 'test@letesteur.test', NULL, '', 0, NULL, NULL, 1, 0, 0),
-(782, 'Juge', 'Test', NULL, NULL, 'jugetest@courriel.com', NULL, NULL, 0, NULL, NULL, 1, 0, 1),
-(783, 'Membre', 'Test1', NULL, NULL, NULL, '5830586', NULL, 0, NULL, 'e1f8e1de-4463-4999-aefc-34e4c51fd2d9', 0, 0, 3),
-(784, 'Membre', 'Test2', NULL, NULL, NULL, '3460599', NULL, 0, NULL, 'c8bab8ab-5bac-4858-af8a-702e78710c58', 0, 0, 3);
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `pwd`, `email`, `numero_da`, `picture`, `picture_consent`, `hide_first_name`, `hide_last_name`, `hide_numero_da`, `reset_token`, `activation_token`, `activated`, `blacklisted`, `role_id`) VALUES
+(1, 'le testeur', 'professionnel', 'test', '$2y$10$wNOJM7zdwWO2KoDZ3jSCKOXbTJnVUnHKlgrJ8sRdwAky/3FzwOiRW', 'test@letesteur.test', NULL, '', 0, 0, 0, 0, NULL, NULL, 1, 0, 0),
+(782, 'Juge', 'Test', NULL, NULL, 'jugetest@courriel.com', NULL, NULL, 0, 0, 0, 0, NULL, NULL, 1, 0, 1),
+(783, 'Membre', 'Test1', NULL, NULL, NULL, '5830586', NULL, 0, 0, 0, 0, NULL, 'e1f8e1de-4463-4999-aefc-34e4c51fd2d9', 0, 0, 3),
+(784, 'Membre', 'Test2', NULL, NULL, NULL, '3460599', NULL, 0, 0, 0, 0, NULL, 'c8bab8ab-5bac-4858-af8a-702e78710c58', 0, 0, 3);
+
+-- Vues de rôles (refonte progressive de users)
+CREATE VIEW `admins` AS SELECT * FROM users WHERE role_id = 0;
+CREATE VIEW `juges` AS SELECT * FROM users WHERE role_id = 1;
+CREATE VIEW `participants` AS SELECT * FROM users WHERE role_id = 3;
 
 -- --------------------------------------------------------
 
@@ -563,9 +572,9 @@ ALTER TABLE `site_component`
   ADD KEY `type_component` (`type_id`);
 
 --
--- Index pour la table `survey`
+-- Index pour la table `evaluationgrids`
 --
-ALTER TABLE `survey`
+ALTER TABLE `evaluationgrids`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -695,9 +704,9 @@ ALTER TABLE `site_component`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
--- AUTO_INCREMENT pour la table `survey`
+-- AUTO_INCREMENT pour la table `evaluationgrids`
 --
-ALTER TABLE `survey`
+ALTER TABLE `evaluationgrids`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
@@ -738,7 +747,7 @@ ALTER TABLE `users_teams`
 -- Contraintes pour la table `categories`
 --
 ALTER TABLE `categories`
-  ADD CONSTRAINT `categories_survey` FOREIGN KEY (`survey_id`) REFERENCES `survey` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `categories_survey` FOREIGN KEY (`survey_id`) REFERENCES `evaluationgrids` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `categories_judge`
@@ -767,7 +776,7 @@ ALTER TABLE `evaluation`
   ADD CONSTRAINT `evaluation_ibfk_1` FOREIGN KEY (`rating_section_id`) REFERENCES `rating_section` (`id`),
   ADD CONSTRAINT `heure_index` FOREIGN KEY (`heure`) REFERENCES `time_slots` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `judge_index` FOREIGN KEY (`judge_id`) REFERENCES `judge` (`id`),
-  ADD CONSTRAINT `survey_index` FOREIGN KEY (`survey_id`) REFERENCES `survey` (`id`),
+  ADD CONSTRAINT `survey_index` FOREIGN KEY (`survey_id`) REFERENCES `evaluationgrids` (`id`),
   ADD CONSTRAINT `survey_teams_index` FOREIGN KEY (`teams_id`) REFERENCES `teams` (`id`);
 
 --
@@ -788,7 +797,7 @@ ALTER TABLE `site_component`
 --
 ALTER TABLE `teams`
   ADD CONSTRAINT `categorie_id` FOREIGN KEY (`categories_id`) REFERENCES `categories` (`id`),
-  ADD CONSTRAINT `teams_survey` FOREIGN KEY (`survey_id`) REFERENCES `survey` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `teams_survey` FOREIGN KEY (`survey_id`) REFERENCES `evaluationgrids` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `teams_contact_person`

@@ -17,6 +17,7 @@ type SnackbarMessageType = AlertColor;
  * @file Page d'affichage et de modification pour les juges actifs.
  * @author Thomas-Gabriel Paquin
  * @author Étienne Nadeau
+ * @author Nathan Reyes
  */
 export default function JudgesListPage() {
     const [listJudge, setListJudge] = useState<Judge[]>([]);
@@ -31,6 +32,7 @@ export default function JudgesListPage() {
 
     /**
      * @author Étienne Nadeau
+ * @author Nathan Reyes
      * Après l'exécution du constructeur, 
      * cette fonction va s'exécuter afin d'aller chercher les juges 
      * et les catégories.
@@ -43,6 +45,7 @@ export default function JudgesListPage() {
     /**
      * @author Thomas-Gabriel Paquin
      * @author Étienne Nadeau
+ * @author Nathan Reyes
      * Permet d'aller obtenir dans l'api les juges qui ont le status actif.
      */
     const getJudges = async () => {
@@ -66,6 +69,7 @@ export default function JudgesListPage() {
      * Mets à jour un juge dans la bd avec les informations reçues.
      * @author Thomas-Gabriel Paquin
      * @author Étienne Nadeau
+ * @author Nathan Reyes
      * @param judge Le juge qui sera mis à jour.
      */
     const patchJudge = async (judge: JudgeUpdate) => {
@@ -86,6 +90,7 @@ export default function JudgesListPage() {
      * Fait une recherche de toutes les catégories présentes dans la base de données
      * @author Thomas-Gabriel Paquin
      * @author Étienne Nadeau
+ * @author Nathan Reyes
      */
     const getCategories = async () => {
         try {
@@ -106,6 +111,7 @@ export default function JudgesListPage() {
      * Met à jour les données des states vers les nouvelles données
      * @author Thomas-Gabriel Paquin
      * @author Étienne Nadeau
+ * @author Nathan Reyes
      * @param userId L'id du user associé au juge à modifier
      * @param displayData Les données qui sont modifier dans le juge
      */
@@ -119,12 +125,14 @@ export default function JudgesListPage() {
             email: displayData.email,
             activated: displayData.activated,
             blacklisted: displayData.blacklisted,
+            isPresentCurrentEdition: displayData.isPresentCurrentEdition,
         };
         await patchJudge(judge);
     };
 
     /**
      * @author Étienne Nadeau
+ * @author Nathan Reyes
      * Méthode permettant de supprimer les juges sélectionnés dans le tableau.
      */
     const deleteSelectedJudges = () => {
@@ -162,6 +170,7 @@ export default function JudgesListPage() {
 
     /**
      * @author Étienne Nadeau
+ * @author Nathan Reyes
      * Définition de l'affichage des colonnes utilisées dans le tableau de gestion des juges.
      * Inspirer de: https://mui.com/x/react-data-grid/column-definition/
      */
@@ -303,6 +312,43 @@ export default function JudgesListPage() {
             },
         },
         {
+            field: "isPresentCurrentEdition",
+            headerName: "Présent à l'édition",
+            editable: true,
+            width: 170,
+            renderEditCell: (params) => (
+                <Checkbox
+                    checked={params.value}
+                    onChange={(event) => {
+                        // Mettre à jour la valeur de présence dans le DataGrid.
+                        // @author Nathan Reyes
+                        params.api.setEditCellValue({
+                            id: params.id,
+                            field: "isPresentCurrentEdition",
+                            value: event.target.checked,
+                        });
+                    }}
+                    onBlur={() => {
+                        editJudge(params.row.id, {
+                            ...params.row,
+                            isPresentCurrentEdition: params.row.isPresentCurrentEdition ? 1 : 0,
+                        });
+                        setSnackbarMessage(`L'état "Présent à l'édition" a été modifié.`);
+                        setSnackbarMessageType("success");
+                        setIsSnackbarOpen(true);
+                    }}
+                />
+            ),
+            valueFormatter: (params) => (params ? "Oui" : "Non"),
+        },
+        {
+            field: "hasAssignedTeam",
+            headerName: "Équipe attribuée",
+            editable: false,
+            width: 160,
+            valueFormatter: (params) => (params ? "Oui" : "Non"),
+        },
+        {
             field: "activated",
             headerName: "Activé",
             editable: true,
@@ -374,6 +420,7 @@ export default function JudgesListPage() {
     /**
      * @author Thomas-Gabriel Paquin
      * @author Étienne Nadeau
+ * @author Nathan Reyes
      * @returns Retourne un tableau contenant les juges actifs et l'option de les modifier.
      */
     return (

@@ -24,6 +24,7 @@ use App\Actions\Users\ChangePasswordAction;
 use App\Actions\Administrators\GetAllAdministratorsAction;
 use App\Actions\Administrators\DeleteAdministratorsByIdsAction;
 use App\Actions\Administrators\PostAdministratorAction;
+use App\Actions\Administrators\ResetEventDataAction;
 
 // ?
 use App\Actions\SignUpTeamAction\PostSignUp;
@@ -176,6 +177,9 @@ $app->group('/api', function (RouteCollectorProxy $group) {
 
         // Permet de supprimer une liste d'administrateurs par leurs ids.
         $administratorsGroup->delete("", DeleteAdministratorsByIdsAction::class);
+
+        // Permet de réinitialiser les données de l'événement (résultats, juges, inscriptions, etc.).
+        $administratorsGroup->post("/reset-event-data", ResetEventDataAction::class);
     });
 
 

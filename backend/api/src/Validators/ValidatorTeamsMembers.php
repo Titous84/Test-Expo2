@@ -48,8 +48,8 @@ class ValidatorTeamsMembers extends Validator
         //Vérications du consentement à la photo
         if (!isset($member['picture_consent'])) {
             $messages[] = 'Le champ "picture_consent" est obligatoire.';
-        } else if ($member['picture_consent'] !== 0 && $member['picture_consent'] !== 1) {
-            $messages[] = "Le consentement à la photo doit être 1 (oui) ou 0 (non). ";
+        } else if (!in_array((int)$member['picture_consent'], [0,1,2], true)) {
+            $messages[] = "Le consentement à la photo doit être 0 (refus), 1 (publication) ou 2 (usage interne). ";
         }
 
         //Vérications de l'activation

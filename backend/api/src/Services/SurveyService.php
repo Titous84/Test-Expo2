@@ -282,6 +282,13 @@ public function send_all_survey_judgeIndividually(array $judges)
             return new Result(EnumHttpCode::NOT_FOUND, array("Aucun juge trouvé."));
         }
 
+        // Vérifie côté serveur que seuls les juges actifs, présents et assignés reçoivent un lien.
+        // @author Nathan Reyes
+        $judges = $this->surveyRepository->filter_valid_judges_for_send($judges);
+        if (count($judges) == 0) {
+            return new Result(EnumHttpCode::BAD_REQUEST, array("Aucun juge admissible (actif, présent et assigné) pour l'envoi."));
+        }
+
         //On va leur attribuer des nouveaux uuid afin de garantir la sécurité
         $nombreObjetChange = 0;
         $newJudgeArray = [];

@@ -895,4 +895,26 @@ class UserService
 			return new Result(EnumHttpCode::SERVER_ERROR, array("Une erreur inattendue est survenue."));
 		}
 	}
+
+    /**
+     * Réinitialise les données d'événement (inscriptions, évaluations, assignations).
+     * @author Nathan Reyes
+     */
+    public function reset_event_data(): Result
+    {
+        try {
+            $resetSuccess = $this->userRepository->reset_event_data();
+
+            if (!$resetSuccess) {
+                return new Result(EnumHttpCode::BAD_REQUEST, array("La réinitialisation a échoué. Vérifiez les contraintes de suppression."));
+            }
+
+            return new Result(EnumHttpCode::SUCCESS, array("Les données de l'événement ont été réinitialisées avec succès."));
+        } catch (Exception $exception) {
+            $context["http_error_code"] = $exception->getCode();
+            $this->logHandler->critical($exception->getMessage(), $context);
+            return new Result(EnumHttpCode::SERVER_ERROR, array("Une erreur inattendue est survenue lors de la réinitialisation."));
+        }
+    }
+
 }

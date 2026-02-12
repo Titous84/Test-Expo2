@@ -199,7 +199,9 @@ class SurveyRepository extends Repository
         FROM judge
         INNER JOIN users
         ON judge.users_id=users.id
-        WHERE users.blacklisted IS NOT true AND users.activated IS true AND role_id=1;";
+        WHERE users.blacklisted IS NOT true AND users.activated IS true AND role_id=1
+        AND judge.is_present_current_edition = 1
+        AND EXISTS (SELECT 1 FROM evaluation e WHERE e.judge_id = judge.id AND e.est_actif = 1);";
         $req = $this->db->query($sql);
         return $req->fetchAll();
     }
@@ -234,5 +236,43 @@ class SurveyRepository extends Repository
         ));
 
         return $req->rowCount();
+    }
+
+    /**
+     * Filtre les juges admissibles à l'envoi d'évaluations (actifs, présents et assignés).
+     * @author Nathan Reyes
+     * @param array $judges Liste de juges provenant du frontend (id = users.id).
+     * @return array Retourne uniquement les juges admissibles.
+     */
+    public function filter_valid_judges_for_send(array $judges): array
+    {
+        if (count($judges) === 0) {
+            return [];
+        }
+
+        $userIds = array_map(fn($j) => (int)($j['id'] ?? 0), $judges);
+        $userIds = array_values(array_filter($userIds, fn($id) => $id > 0));
+
+        if (count($userIds) === 0) {
+            return [];
+        }
+
+        $placeholders = implode(',', array_fill(0, count($userIds), '?'));
+
+        $sql = "SELECT users.id as users_id
+                FROM users
+                INNER JOIN judge ON judge.users_id = users.id
+                WHERE users.id IN ($placeholders)
+                AND users.role_id = 1
+                AND users.activated = 1
+                AND users.blacklisted = 0
+                AND judge.is_present_current_edition = 1
+                AND EXISTS (SELECT 1 FROM evaluation e WHERE e.judge_id = judge.id AND e.est_actif = 1)";
+
+        $req = $this->db->prepare($sql);
+        $req->execute($userIds);
+        $validIds = array_map(fn($row) => (int)$row['users_id'], $req->fetchAll(PDO::FETCH_ASSOC));
+
+        return array_values(array_filter($judges, fn($judge) => in_array((int)($judge['id'] ?? 0), $validIds, true)));
     }
 }

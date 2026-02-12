@@ -2,6 +2,7 @@
  * Juge
  * @author Jean-Philippe Bourassa
  * @author Thomas-Gabriel Paquin
+ * @author Nathan Reyes
  */
  export default interface Judge{
       /**
@@ -44,4 +45,14 @@
       * Activé
       */
      activated:boolean;
+
+    /**
+     * Indique si le juge participe réellement à l'édition courante.
+     */
+    isPresentCurrentEdition?:boolean;
+
+    /**
+     * Indique si au moins une équipe est attribuée au juge.
+     */
+    hasAssignedTeam?:boolean;
 }

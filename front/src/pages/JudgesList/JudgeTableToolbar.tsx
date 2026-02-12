@@ -19,6 +19,7 @@ interface JudgeTableToolbarProps {
 /**
  * Bouton qui permet de naviguer vers la page d'envoi d'évaluation aux juges.
  * @author Tommy Garneau
+ * @author Nathan Reyes
  * code inspiré de https://medium.com/@bobjunior542/using-usenavigate-in-react-router-6-a-complete-guide-46f51403f430
  * @param selectedJudges La liste des juges sélectionnés.
  * @returns Un bouton qui permet d'envoyer un courriel aux juges sélectionnés.
@@ -26,13 +27,17 @@ interface JudgeTableToolbarProps {
 function SendEvaluationGridsButton({ selectedJudges }: { selectedJudges: Judge[] }) {
     const navigate = useNavigate();
 
+    // Filtre les juges réellement admissibles à l'envoi de lien (actifs, présents, et assignés).
+    // @author Nathan Reyes
+    const eligibleJudges = (selectedJudges || []).filter((judge) =>
+        judge.activated && judge.isPresentCurrentEdition && judge.hasAssignedTeam
+    );
+
     const handleClick = () => {
-        if (selectedJudges && selectedJudges.length > 0) {
-            navigate("/envoiEvaluationsJugeIndividuelle", { state: { selectedJudges } });
+        if (eligibleJudges.length > 0) {
+            navigate("/envoiEvaluationsJugeIndividuelle", { state: { selectedJudges: eligibleJudges } });
         } else {
-            // Gérer le cas où aucun juge n'est sélectionné (afficher un message, désactiver le bouton, etc.)
-            console.warn("Aucun juge sélectionné pour l'envoi d'évaluation.");
-            // Vous pouvez également afficher un Snackbar ici pour informer l'utilisateur.
+            console.warn("Aucun juge admissible sélectionné pour l'envoi d'évaluation.");
         }
     };
 
@@ -41,7 +46,7 @@ function SendEvaluationGridsButton({ selectedJudges }: { selectedJudges: Judge[]
             className="sendMailButton"
             startIcon={<SendIcon />}
             onClick={handleClick}
-            disabled={!selectedJudges || selectedJudges.length === 0} // Désactiver si aucun juge n'est sélectionné
+            disabled={eligibleJudges.length === 0} // Désactiver si aucun juge admissible n'est sélectionné
         >
             Envoyer les évaluations
         </Button>

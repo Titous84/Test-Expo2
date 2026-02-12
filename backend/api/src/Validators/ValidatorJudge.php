@@ -42,6 +42,12 @@ class ValidatorJudge extends Validator
             array_push($emptyFields, "Catégorie");
         }
 
+        // Validation optionnelle de la présence à l'édition courante.
+        // @author Nathan Reyes
+        if (isset($judgeJSON["isPresentCurrentEdition"]) && !is_bool($judgeJSON["isPresentCurrentEdition"]) && !in_array($judgeJSON["isPresentCurrentEdition"], [0, 1], true)) {
+            array_push($formatErrors, "Le champ de présence à l'édition doit être booléen.");
+        }
+
         $messages = [];
         if (!empty($emptyFields)) {
 			//Inspirer de: https://www.php.net/manual/fr/function.implode.php
