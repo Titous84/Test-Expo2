@@ -20,7 +20,7 @@ class SendRepository extends Repository
             INNER JOIN users ON users.id = judge.users_id
             INNER JOIN teams ON teams.id = evaluation.teams_id
             INNER JOIN categories ON categories.id = teams.categories_id
-            INNER JOIN survey ON survey.id = evaluation.survey_id
+            INNER JOIN evaluationgrids ON evaluationgrids.id = evaluation.survey_id
             INNER JOIN teams_contact_person ON teams_contact_person.teams_id = teams.id
             INNER JOIN contact_person ON contact_person.id = teams_contact_person.contact_person_id
             WHERE teams.id = :id

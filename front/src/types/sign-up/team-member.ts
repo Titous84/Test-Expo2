@@ -16,7 +16,19 @@ export default interface TeamMember{
      */
     numero_da:string;
     /**
-     * Consentement d'être pris en photo
+     * Clause de consentement photo: 0 = refus total, 1 = publication externe, 2 = usage interne seulement
      */
     pictureConsent:number;
+    /**
+     * Masquer le prénom du membre dans les listes publiques
+     */
+    hideFirstName:boolean;
+    /**
+     * Masquer le nom du membre dans les listes publiques
+     */
+    hideLastName:boolean;
+    /**
+     * Masquer le numéro DA du membre dans les listes publiques
+     */
+    hideNumeroDa:boolean;
 }

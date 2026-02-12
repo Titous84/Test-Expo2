@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import AdministratorCreationDialog from "../AdministratorCreationDialog/AdministratorCreationDialog";
 import AdministratorsTableToolbar from "./AdministratorsTableToolbar";
@@ -33,7 +33,9 @@ export default function AdministratorsTable() {
         setIsConfirmationDialogOpen,
         getAllAdministrators,
         handleDeleteButtonClick,
-        deleteSelectedAdministrators
+        deleteSelectedAdministrators,
+        isResetLoading,
+        resetEventData
     } = useAdministratorsTableHook(); // Récupére les variables d'état et les méthodes dans le fichier séparé.
     
     // Quelles colonnes on veut afficher dans le tableau et sous quel nom.
@@ -68,6 +70,22 @@ export default function AdministratorsTable() {
 
     return (
         <div data-testid="administratorsTable">
+            <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
+                <Button
+                    variant="contained"
+                    color="warning"
+                    disabled={isResetLoading}
+                    onClick={() => {
+                        const confirmation = window.confirm("Êtes-vous certain de vouloir réinitialiser les données de l'événement? Cette action est irréversible.")
+                        if (confirmation) {
+                            resetEventData()
+                        }
+                    }}
+                >
+                    Réinitialiser les données de fin d'événement
+                </Button>
+            </Box>
+
             {/* Le tableau */}
             <DataGrid
                 rows={administratorsList}

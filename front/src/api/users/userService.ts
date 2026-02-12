@@ -132,6 +132,23 @@ export default class UserService {
     }
 
     /**
+     * Réinitialise les données de l'édition (résultats, juges, inscriptions).
+     */
+    public static async resetEventData(): Promise<void> {
+        let response: APIResult<void>;
+        try {
+            response = await APIRequest("administrators/reset-event-data", "POST", true);
+        } catch (error) {
+            console.error("Erreur lors de la réinitialisation de l'événement :", error);
+            throw new Error("Une erreur est survenue lors de la réinitialisation des données.");
+        }
+
+        if (response.error) {
+            throw new Error(response.error);
+        }
+    }
+
+    /**
      * @author Thomas-gabriel Paquin
      * Permet de recevoir les informations des juges.
      * @param blacklisted Information si les juges font partis de la liste noire.
