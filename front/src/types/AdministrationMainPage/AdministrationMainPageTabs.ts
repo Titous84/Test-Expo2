@@ -30,6 +30,7 @@ export interface AdministrationMainPageTab {
 
 /**
  * Liste des onglets de la barre latérale de navigation dans la page d'administration.
+ * @author Nathan Reyes
  * @type {AdministrationMainPageTab[]} Un tableau d'objets représentant un onglet de la barre latérale.
  */
 export const ADMINISTRATION_MAIN_PAGE_TABS: AdministrationMainPageTab[] = [
@@ -75,8 +76,8 @@ export const ADMINISTRATION_MAIN_PAGE_TABS: AdministrationMainPageTab[] = [
     },
     {
         id: "administrateurs",
-        primaryText: "Administrateurs",
-        secondaryText: "Ajouter et supprimer des administrateurs et modifier leur mot de passe",
+        primaryText: "Paramètres généraux",
+        secondaryText: "Configurer les paramètres administratifs et la réinitialisation annuelle",
         componentToDisplayInContentZone: AdministratorsListPage,
         icon: ManageAccountsIcon,
         iconColor: grey[500]

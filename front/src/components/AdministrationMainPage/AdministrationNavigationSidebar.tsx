@@ -9,10 +9,12 @@ import { ADMINISTRATION_MAIN_PAGE_TABS } from "../../types/AdministrationMainPag
  */
 interface AdministrationNavigationSidebarProps {
     onAdministrationSidebarTabSelected: (tabId: string) => void; // Méthode passée par le parent.
+    selectedTabId: string; // Onglet actuellement sélectionné.
 }
 
 /**
  * Barre de navigation affichée à la gauche de la page d'administration seulement.
+ * @author Nathan Reyes
  * Affiche une liste d'onglets de toutes les contenus à afficher dans la page d'administration.
  * Le contenu dans la zône adjacente à la barre de navigation dans la page d'administration changera selon l'onglet sélectionné.
  */
@@ -35,6 +37,7 @@ export default class AdministrationNavigationSidebar extends React.Component<Adm
                             <ListItem key={tab.id} disablePadding> {/* Chaque <ListItem> a besoin d'un id unique. On prend celui dans le tab actuel. */}
                                 <ListItemButton
                                     component="a" // `component="a"` : le <ListItemButton> sera considéré comme un bouton. Donc, le curseur de la souris changera pour «pointer» quand on le hover.
+                                    selected={this.props.selectedTabId === tab.id}
                                     onClick={() => this.props.onAdministrationSidebarTabSelected(tab.id)} // Quand cet onglet est cliqué, ça appelle la méthode `onTabSelected()` située dans le composant parent en lui passant l'id de cet onglet.
                                 >
                                     <ListItemIcon><tab.icon fontSize="large" sx={{ color: tab.iconColor }} /></ListItemIcon> {/* `<tab.icon>` veut dire affiche le composant React qui se trouve dans la propriété `icon` de l'objet `tab`. */}

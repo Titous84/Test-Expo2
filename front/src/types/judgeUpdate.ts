@@ -31,4 +31,10 @@
       * Activé
       */
      activated:boolean;
+
+     /**
+      * Présence du juge à l'édition courante
+      * @author Nathan Reyes
+      */
+     isPresentCurrentEdition?:boolean;
 }

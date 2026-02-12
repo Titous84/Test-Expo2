@@ -222,15 +222,16 @@ CREATE TABLE `judge` (
   `id` int NOT NULL,
   `uuid` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci,
   `categories_id` int NOT NULL,
-  `users_id` int NOT NULL
+  `users_id` int NOT NULL,
+  `is_present_current_edition` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Déchargement des données de la table `judge`
 --
 
-INSERT INTO `judge` (`id`, `uuid`, `categories_id`, `users_id`) VALUES
-(34, '94097b1b-05b7-4c13-879d-69ad597846e9', 6, 782);
+INSERT INTO `judge` (`id`, `uuid`, `categories_id`, `users_id`, `is_present_current_edition`) VALUES
+(34, '94097b1b-05b7-4c13-879d-69ad597846e9', 6, 782, 1);
 
 -- --------------------------------------------------------
 

@@ -56,7 +56,12 @@ class UserRepository extends Repository
     {
 		try
 		{
-			$sql = "SELECT users.id, first_name as firstName, last_name as lastName, email, uuid, categories.name AS category, users.blacklisted, users.activated
+			$sql = "SELECT users.id, first_name as firstName, last_name as lastName, email, uuid, categories.name AS category, users.blacklisted, users.activated,
+            judge.is_present_current_edition AS isPresentCurrentEdition,
+            CASE WHEN EXISTS (
+                SELECT 1 FROM evaluation e
+                WHERE e.judge_id = judge.id AND e.est_actif = 1
+            ) THEN 1 ELSE 0 END AS hasAssignedTeam
 			FROM users 
 			INNER JOIN judge ON judge.users_id = users.id
 			INNER JOIN categories ON judge.categories_id = categories.id
@@ -286,7 +291,12 @@ class UserRepository extends Repository
     {
 		try
 		{
-			$sql = "SELECT users.id, first_name as firstName, last_name as lastName, email, uuid, categories.name AS category, blacklisted, activated
+			$sql = "SELECT users.id, first_name as firstName, last_name as lastName, email, uuid, categories.name AS category, blacklisted, activated,
+            judge.is_present_current_edition AS isPresentCurrentEdition,
+            CASE WHEN EXISTS (
+                SELECT 1 FROM evaluation e
+                WHERE e.judge_id = judge.id AND e.est_actif = 1
+            ) THEN 1 ELSE 0 END AS hasAssignedTeam
 			FROM users 
 			INNER JOIN judge ON judge.users_id = users.id
 			INNER JOIN categories ON judge.categories_id = categories.id
@@ -567,7 +577,7 @@ class UserRepository extends Repository
 				return new Result(EnumHttpCode::BAD_REQUEST, array("Une ereur est survenue lors de la récupération des information utilisateur du juge."));
 			}
 
-			$sql = "INSERT INTO judge(categories_id, users_id, uuid) 
+			$sql = "INSERT INTO judge(categories_id, users_id, uuid, is_present_current_edition) 
 			VALUES(:category, :user, :uuid)";
 			$req = $this->db->prepare($sql);
 			$uuid = GeneratorUUID::generate_single_UUID();
@@ -691,7 +701,15 @@ class UserRepository extends Repository
 			));
 			$results = $query->rowCount();
 
-        	return $results || $this->update_judge_category($data['judge']['id'], $data['judge']['categoryId']);
+        	$sqlJudgePresence = "UPDATE judge SET is_present_current_edition=:is_present_current_edition WHERE users_id=:id";
+            $queryJudgePresence = $this->db->prepare($sqlJudgePresence);
+            $queryJudgePresence->execute(array(
+                ":id" => $data['judge']['id'],
+                ":is_present_current_edition" => $data['judge']['isPresentCurrentEdition']
+            ));
+            $resultJudgePresence = $queryJudgePresence->rowCount();
+
+        	return $results || $resultJudgePresence || $this->update_judge_category($data['judge']['id'], $data['judge']['categoryId']);
 		}
 		catch(PDOException $e)
 		{
