@@ -1033,4 +1033,38 @@ class UserRepository extends Repository
 			return false;
 		}
 	}
+
+    /**
+     * Réinitialise les données opérationnelles d'une édition Expo-SAT.
+     * Les comptes administrateurs et le référentiel (catégories/grilles) sont conservés.
+     */
+    public function reset_event_data(): bool
+    {
+        try {
+            $this->db->beginTransaction();
+
+            $this->db->exec("SET FOREIGN_KEY_CHECKS=0");
+            $this->db->exec("DELETE FROM criteria_evaluation");
+            $this->db->exec("DELETE FROM evaluation");
+            $this->db->exec("DELETE FROM categories_judge");
+            $this->db->exec("DELETE FROM judge");
+            $this->db->exec("DELETE FROM users_teams");
+            $this->db->exec("DELETE FROM teams_contact_person");
+            $this->db->exec("DELETE FROM teams");
+            $this->db->exec("DELETE FROM contact_person");
+            $this->db->exec("DELETE FROM users WHERE role_id IN (1, 3)");
+            $this->db->exec("DELETE FROM results");
+            $this->db->exec("SET FOREIGN_KEY_CHECKS=1");
+
+            $this->db->commit();
+            return true;
+        } catch (PDOException $exception) {
+            $this->db->rollBack();
+            $this->db->exec("SET FOREIGN_KEY_CHECKS=1");
+            $context["http_error_code"] = $exception->getCode();
+            $this->logHandler->critical($exception->getMessage(), $context);
+            return false;
+        }
+    }
+
 }

@@ -20,6 +20,9 @@ export default function useAdministratorsTableHook() {
 
     // Indique si la suppression est en cours ou non.
     const [isDeleteLoading, setIsDeleteLoading] = useState<boolean>(false)
+
+    // Indique si la réinitialisation de fin d'événement est en cours.
+    const [isResetLoading, setIsResetLoading] = useState<boolean>(false)
     
     // Snackbar pour afficher les messages d'erreur ou de succès.
     const [isSnackbarOpen, setIsSnackbarOpen] = useState<boolean>(false) // Pour contrôler si le snackbar est affiché ou non.
@@ -117,6 +120,29 @@ export default function useAdministratorsTableHook() {
             })
     }
 
+    /**
+     * Réinitialise les données de fin d'événement.
+     */
+    const resetEventData = () => {
+        setIsResetLoading(true)
+
+        UserService.resetEventData()
+            .then(() => {
+                setIsResetLoading(false)
+                setSelectedAdministratorsIds([])
+                getAllAdministrators()
+                setSnackbarMessage("Les données de l'événement ont été réinitialisées.")
+                setSnackbarMessageType("success")
+                setIsSnackbarOpen(true)
+            })
+            .catch((error: Error) => {
+                setIsResetLoading(false)
+                setSnackbarMessage(error.message)
+                setSnackbarMessageType("error")
+                setIsSnackbarOpen(true)
+            })
+    }
+
     // Exposer les variables d'état et les méthodes pour qu'elles soient accessibles dans le composant.
     return {
         administratorsList,
@@ -127,6 +153,8 @@ export default function useAdministratorsTableHook() {
         setIsTableLoading,
         isDeleteLoading,
         setIsDeleteLoading,
+        isResetLoading,
+        setIsResetLoading,
         isSnackbarOpen,
         setIsSnackbarOpen,
         snackbarMessage,
@@ -139,6 +167,7 @@ export default function useAdministratorsTableHook() {
         setIsConfirmationDialogOpen,
         getAllAdministrators,
         handleDeleteButtonClick,
-        deleteSelectedAdministrators
+        deleteSelectedAdministrators,
+        resetEventData
     }
 }

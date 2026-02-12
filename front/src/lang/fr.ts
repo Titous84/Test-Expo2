@@ -178,9 +178,18 @@ export const TEXTS = {
             }
         },
         pictureConsent:{
-            label:"Je consens à être pris en photo et j'autorise le comité à les utiliser pour faire de la publicité future (site web, médias sociaux, journaux, etc.)",
+            label:"Consentement à la prise et à l'usage des photos",
+            publication:"J'accepte la publication externe (site web, réseaux sociaux, médias)",
             yes:"Oui",
+            internalOnly:"J'accepte uniquement un usage interne (documentation Expo-SAT)",
+            none:"Je refuse toute prise/usage de photo",
             no:"Non"
+        },
+        anonymity:{
+            title:"Paramètres de confidentialité",
+            hideFirstName:"Masquer mon prénom dans les listes publiques",
+            hideLastName:"Masquer mon nom de famille dans les listes publiques",
+            hideNumeroDa:"Masquer mon numéro DA dans les interfaces administratives non essentielles"
         },
         buttons:{
             addMember:"Ajouter un membre",

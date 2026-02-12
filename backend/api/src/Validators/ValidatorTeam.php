@@ -145,6 +145,16 @@ class ValidatorTeam extends Validator
                     if ($this->is_empty($team['members'][$a]['numero_da'])) {
                         $messages[] = "Le numéro DA du membre est obligatoire : " . $team['members'][$a]['numero_da'];
                     }
+
+                    if (!isset($team['members'][$a]['pictureConsent']) || !in_array((int)$team['members'][$a]['pictureConsent'], [0,1,2], true)) {
+                        $messages[] = "Le consentement photo doit être 0 (refus), 1 (publication), ou 2 (usage interne).";
+                    }
+
+                    foreach (['hideFirstName', 'hideLastName', 'hideNumeroDa'] as $privacyField) {
+                        if (isset($team['members'][$a][$privacyField]) && !is_bool($team['members'][$a][$privacyField])) {
+                            $messages[] = "Le champ de confidentialité {$privacyField} doit être booléen.";
+                        }
+                    }
                 }
             }
         }
