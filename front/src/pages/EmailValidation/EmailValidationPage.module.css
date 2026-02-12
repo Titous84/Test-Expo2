@@ -1,0 +1,22 @@
+.centered{
+    margin-top: 5%;
+    width: 100%;
+    text-align: center;
+}
+.icon{
+    color: green;
+    transform: scale(2.8);
+}
+button.bouton{
+    background-color: black !important;
+    color: white;
+  }
+button.bouton:first-child{
+    margin-right: 10px;
+  }
+  
+button.bouton:hover{
+    background-color: rgb(41, 41, 41);
+    color: white;
+    border-color: rgb(41, 41, 41);
+}

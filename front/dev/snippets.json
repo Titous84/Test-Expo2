@@ -1,0 +1,31 @@
+{
+    "Component" :{
+		"prefix": ["component","react-class"],
+		"body":[
+			"import React from 'react';",
+			"",
+			"interface $1Props{",
+			"",
+			"}",
+			"interface $1State{",
+			"",
+			"}",
+			"",
+			"export default class ${1:name} extends React.Component<$1Props, $1State> {",
+  			"\tconstructor(props:$1Props){",
+			"\t\tsuper(props)",
+			"\t\tthis.state = {",
+			"\t\t\t",
+			"\t\t}",
+			"\t}",
+			"\trender(){",
+			"\t\treturn (",
+			"\t\t\t<>",
+			"\t\t\t</>",
+			"\t\t);",
+			"\t}",
+			"}"
+		],
+		"description": "A class React component"
+	}
+}

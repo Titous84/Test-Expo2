@@ -1,0 +1,8 @@
+.idea/
+../../.idea/
+.phpdoc/
+/vendor/
+.phpunit.result.cache
+log/
+public/Uploads/
+.env.prod

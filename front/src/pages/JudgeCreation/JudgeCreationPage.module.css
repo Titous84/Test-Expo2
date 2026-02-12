@@ -1,0 +1,95 @@
+h1.titre {
+    font-size: 50px;
+}
+
+p.alignRight {
+    text-align: right;
+    font-size: 10px;
+}
+
+p.alignLeft {
+    text-align: left;
+    font-size: 10px;
+}
+
+.paddingPaper{
+    padding: 40px;
+}
+div .member:not(:first-child){
+    margin: 0%;
+    margin-top: 60px;
+}
+
+.paddingPaperTop{
+    padding-top: 40px;
+}
+
+.paddingEntreCarre{
+    padding-top: 70px;
+}
+
+.subhead{
+    background-color:black !important;
+    color: white !important;
+    text-align: center;
+    margin-top: -4.65rem;
+    margin-right: -1rem;
+    margin-bottom: 1rem;
+    margin-left: -1rem;
+    padding-top: 0.1rem;
+    padding-bottom: 0.1rem;
+}
+
+.stack{
+    position: relative;
+}
+
+div .boutonMembre{
+    background-color: black;
+    color: white;
+}
+div .boutonMembre:first-child{
+    margin-right: 10px;
+}
+
+div .boutonMembre:hover{
+    background-color: rgb(41, 41, 41);
+    color: white;
+    border-color: rgb(41, 41, 41);
+}
+
+.widthCategory{
+    width: 100%;
+}
+.teamInfoMaxLenght{
+    text-align: right;
+    font-size: 10px;
+    margin-top: -20px;
+}
+
+.flex{
+    display: flex;
+}
+
+.flexTitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.helpPosition{
+    margin-top:-10px
+}
+
+.helpWhite{
+    color: white;
+}
+
+.alertMargin{
+    margin-top: 10px;
+}
+
+.pageFullScreen{
+    height: 80vh;
+    width: 100vw;
+}

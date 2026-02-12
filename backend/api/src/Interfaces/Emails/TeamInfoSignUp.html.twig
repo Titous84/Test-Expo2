@@ -1,0 +1,31 @@
+{% include './Emails/Components/Header.html.twig' %}
+<tr>
+    <td style="padding:0 0 6px 0;color:#153643;">
+        <div style="text-align: center;">
+            <h1 style="font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;">Information sur une nouvelle équipe inscrite</h1>
+            <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">Bonjour {{nameContactPerson}},</p>
+            <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">
+                Une équipe vous a choisi pour être leur enseignant(e) ressource pour leur projet d'Expo SAT.
+            </p>  
+        </div>
+        </br>
+        <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">
+            <strong>Voici les informations sur l'équipe : </strong>
+        </p>
+        <ul style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">
+            <li>Nom de l'équipe : {{title}}</li>
+            <li>La description : {{description}}</li>
+            <li>La catégorie : {{category}}</li>
+            <li>L'année de l'équipe : {{year}}</li>
+        </ul>
+        <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">
+            <strong>Les membres de l'équipe sont : </strong>
+        </p>
+        <ul style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">
+            {% for member in members %}
+                <li>{{member.firstName}} {{member.lastName}} : {{member.email}}</li>
+            {% endfor %}
+        </ul>
+    </td>
+</tr>
+{% include './Emails/Components/Footer.html.twig' %}

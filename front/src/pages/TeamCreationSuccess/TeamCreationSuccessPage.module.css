@@ -1,0 +1,49 @@
+.centered{
+    margin-top: 5%;
+    width: 100%;
+    text-align: center;
+}
+.icon{
+    color: green;
+    transform: scale(2.8);
+}
+button.bouton{
+    background-color: black !important;
+    color: white;
+  }
+button.bouton:first-child{
+    margin-right: 10px;
+  }
+  
+button.bouton:hover{
+    background-color: rgb(41, 41, 41);
+    color: white;
+    border-color: rgb(41, 41, 41);
+}
+
+.pageFullScreen {
+  min-height: 100vh; /** Ajustement pour que le contenu de la page ne dépasse pas sur le footer de la page */
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.success-message {
+  text-align: left;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.success-message p {
+  margin: 10px 0;
+}
+
+.success-message .team-info {
+  margin: 10px 0;
+}
+
+.success-message .team-info .member {
+  margin-left: 20px;
+}

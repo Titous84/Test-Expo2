@@ -1,0 +1,21 @@
+.paddingPaper{
+    padding: 40px;
+    margin-top:75px;
+    margin-bottom:50px;
+}
+
+.paddingPaperTop{
+    padding-top: 40px;
+}
+
+.subhead{
+    background-color:black !important;
+    color: white !important;
+    text-align: center;
+    margin-top: -4.65rem;
+    margin-right: -1rem;
+    margin-bottom: 1rem;
+    margin-left: -1rem;
+    padding-top: 0.1rem;
+    padding-bottom: 0.1rem;
+}

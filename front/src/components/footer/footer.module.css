@@ -1,0 +1,74 @@
+hr.gradientTransparent {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(100, 100, 100, 0), rgba(100, 100, 100, 1), rgba(100, 100, 100, 0));
+}
+* {
+    box-sizing: border-box;
+}
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+}
+.row::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.centeredBox {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 60%;
+    background-color:rgb(0, 0, 0);
+    padding: 10px;
+    margin-bottom: 20px;
+    color: whitesmoke;
+}
+
+.footer {
+    background-image: url("exposat_footer_2025.PNG");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0%;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+.footerLink {
+    display: block;
+    color: whitesmoke;
+    text-align: center;
+    padding: 5px;
+    margin: 10px;
+    text-decoration: none;
+    font-size: medium;
+}
+.footerLink:hover {
+    color: rgba(245, 245, 245, 0.6);
+}
+img.logoCegep {
+    float: right;
+    max-width: 200px;
+    max-height: 200px;
+}
+@media only screen and (max-width: 1080px) {
+    /* Colonne utilise 100% de la largeur quand footer trop petit */
+    .column {
+        width: 100%;
+    }
+    /* Boite footer devient la largeur de l'ecran */
+    .centeredBox {
+        width: 70%;
+    }
+    img.logoCegep {
+        float: left;
+    }
+}
+@media only screen and (max-width: 750px) {
+    /* Boite footer devient la largeur de l'ecran */
+    .centeredBox {
+        width: 100%;
+    }
+}

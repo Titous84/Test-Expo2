@@ -1,0 +1,6 @@
+{
+    "phpunit.phpunit": "./backend/api/vendor/bin/phpunit",
+    "vitest.commandLine": "npm run test --prefix ./front --",
+    "vitest.enable": true,
+    "vitest.showFailMessages": true
+}

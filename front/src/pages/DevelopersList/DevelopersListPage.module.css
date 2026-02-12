@@ -1,0 +1,26 @@
+.centeredTable {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+}
+.paperWidth {
+    margin: auto;
+    padding-bottom: 20px;
+    text-align: center;
+}
+hr.gradientTransparent {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(100, 100, 100, 0), rgba(100, 100, 100, 1), rgba(100, 100, 100, 0));
+}
+@media only screen and (max-width: 1920px) and (min-width: 1080px) {
+    .paperWidth {
+        width: 50%;
+    }
+}
+@media only screen and (max-width: 1080px) {
+    .paperWidth {
+        width: 100%;
+    }
+}

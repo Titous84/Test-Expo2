@@ -1,0 +1,73 @@
+/** 
+* Style CSS pour le tableau des résultats des juges
+
+* @author Francis Payan
+*/
+
+/* Applique un fond coloré aux cellules de catégorie */
+.categoryBackground {
+    background-color: #f0f0f0; /* Couleur de fond clair pour une meilleure lisibilité */
+}
+
+/* Container pour les scores des juges, permettant un affichage en ligne */
+.judgeScoresContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+/* Style pour les cellules du tableau */
+.judgeScoreWrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.judgeScore {
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #333;
+}
+
+
+/* Style pour le texte en gras */
+.boldText {
+  font-weight: bold !important; 
+}
+
+/* Styles pour le titre du tableau et le bouton de réinitialisation */
+.tableTitleContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Style pour le titre du tableau */
+.tableTitle {
+  font-size: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Style pour le bouton de réinitialisation */
+.resetButton {
+  margin-bottom: 10px;
+  background-color: #000000 !important;
+  color: #fff;
+  transition: background-color 0.3s; /* Effet de transition pour le hover */
+}
+
+/* Style pour le bouton de réinitialisation au hover */
+.resetButton:hover {
+  background-color: #3b3b3b !important;
+  color: #fff; /* La couleur de fond du bouton au hover */
+}
+

@@ -1,0 +1,20 @@
+.infoBlock{
+    border-style: solid;
+    border-color: grey;
+    margin-bottom: 10px;
+}
+.titleAndIcons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.title{
+    margin: 0%;
+    padding-left: 1%;
+    width: 50%;
+}
+.iconDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}

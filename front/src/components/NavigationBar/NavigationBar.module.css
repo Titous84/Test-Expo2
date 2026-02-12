@@ -1,0 +1,96 @@
+.backgroundElements {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgb(28,36,60);
+}
+/*Positionnement des elements*/
+/*Elements sur un ecran d'ordinateur*/
+@media only screen and (max-width: 1920px) and (min-width: 1080px) {
+    .hamburger {
+        display: none;
+    }
+    .menuGlobal {
+        display: block;
+    }
+}
+/*Elements sur une tablette*/
+@media only screen and (max-width: 1080px) and (min-width: 750px) {
+    .hamburger {
+        display: block;
+        margin: 20px;
+    }
+    .menuGlobal {
+        display: none;
+    }
+    img.iconHamburger {
+        max-width: 50px;
+        max-height: 50px;
+        color: whitesmoke;
+    }
+    .lienHamburger {
+        display: block;
+        color: black;
+        text-align: center;
+        padding: 20px;
+        margin: 10px;
+        text-decoration: none;
+        font-size: large;
+    }
+}
+/*Elements sur un telephone*/
+@media only screen and (max-width: 750px) {
+    .hamburger {
+        display: block;
+        margin: 20px;
+    }
+    .menuGlobal {
+        display: none;
+    }
+    img.iconHamburger {
+        max-width: 50px;
+        max-height: 50px;
+        color: whitesmoke;
+    }
+    .lienHamburger {
+        display: block;
+        color: black;
+        text-align: center;
+        padding: 10px;
+        margin: 10px;
+        text-decoration: none;
+        font-size: large;
+    }
+}
+li.positionGauche {
+    float: left;
+}
+li.positionDroit {
+    float: right;
+}
+.lienMenu {
+    display: block;
+    color: whitesmoke;
+    text-align: center;
+    padding: 20px;
+    margin: 10px;
+    text-decoration: none;
+    font-size: large;
+}
+li .lienMenu:hover {
+    background-color: rgb(#134b5f);
+}
+img.logoCegep {
+    margin-top: 5px;
+    margin-left: 5px;
+    max-width: 100px;
+    max-height: 100px;
+}
+p.titreMenu {
+    color: black;
+    text-align: center;
+}
+div.block {
+    display: block;
+}

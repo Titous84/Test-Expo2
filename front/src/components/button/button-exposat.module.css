@@ -1,0 +1,16 @@
+.bouton
+{
+    background-color: black !important;
+    color: white !important;
+}
+
+.bouton:disabled
+{
+  background-color: grey !important;
+}
+
+.bouton:hover{
+    background-color: rgb(41, 41, 41);
+    color: white;
+    border-color: rgb(41, 41, 41);
+}

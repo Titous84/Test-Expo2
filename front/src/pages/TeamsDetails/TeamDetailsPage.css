@@ -1,0 +1,74 @@
+/* Auteur : Francis Payan */
+
+.teamDetailsContainer {
+    text-align: center;
+}
+
+.tableTitle {
+    text-align: left;
+    font-weight: bold;
+}
+
+.finalScore {
+    display: inline-block;
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #000; /* Fond noir */
+    color: #fff; /* Texte blanc */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 1.5em; /* Texte plus grand */
+    font-weight: bold; /* Texte en gras */
+    transition: background-color 0.3s, color 0.3s; /* Transition douce pour hover */
+}
+
+.finalScore:hover {
+    background-color: #ffffff; /* Fond blanc sur hover */
+    color: #000; /* Texte noir sur hover */
+}
+
+.excludedRow {
+    background-color: #ffe5e5; /* Lignes exclues en rouge très clair */
+}
+
+.categoryCell {
+    background-color: #f0f0f0; /* Fond gris clair */
+    font-weight: bold;
+}
+
+.sendButton {
+    background-color: #000 !important; /* Fond noir */
+    color: #fff !important; /* Texte blanc */
+}
+
+.backButton {
+    background-color: #000 !important; /* Fond noir */
+    color: #fff !important; /* Texte blanc */
+    display: inline-block;
+    margin: 20px 0;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 1.5em; /* Texte plus grand */
+    font-weight: bold; /* Texte en gras */
+    transition: background-color 0.3s, color 0.3s; /* Transition douce pour hover */
+}
+
+.backButton:hover {
+    background-color: #fff !important; /* Fond blanc sur hover */
+    color: #000 !important; /* Texte noir sur hover */
+    font-weight: bold;
+}
+
+.error-message {
+    color: red; /* Définit la couleur du texte en rouge */
+    font-size: 16px; /* Taille de la police pour le message */
+    padding: 20px; /* Espacement intérieur pour une meilleure visibilité */
+    text-align: center; /* Centre le texte dans la division */
+    background-color: #fff3f3; /* Un fond légèrement rouge pour mettre en évidence l'erreur */
+    border: 1px solid red; /* Bordure rouge pour accentuer le message d'erreur */
+}
+
+
+
+  

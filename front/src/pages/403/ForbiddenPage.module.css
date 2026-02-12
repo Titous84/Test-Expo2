@@ -1,0 +1,32 @@
+.center {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+}
+h1.title {
+    font-size: 40px;
+}
+h1.forbidden {
+    font-size: 32px;
+}
+img.logoCegep {
+    max-width: 200px;
+    max-height: 200px;
+}
+.homeLink {
+    color: whitesmoke;
+    background-color: black;
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+    text-decoration: none;
+    font-size: large;
+    border-radius: 5px;
+}
+.homeLink:hover {
+    background-color: rgb(80, 80, 80);
+}
+.placeLink {
+    margin-bottom: 30px;
+    margin-top: 40px;
+}

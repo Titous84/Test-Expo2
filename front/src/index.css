@@ -1,0 +1,59 @@
+/* Styles globaux à l'application */
+/* NE PAS METTRE DE STYLES POUR UN COMPOSANT ICI */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+@media (min-width:576px) {
+  .formContainer{
+      width: 540px;
+  }
+}
+@media (min-width:768px) {
+  .formContainer{
+      width: 720px;
+  }
+}
+@media (min-width:992px) {
+  .formContainer{
+      width: 960px;
+  }
+}
+@media (min-width:1200px) {
+  .formContainer{
+      width: 1140px;
+  }
+}
+.centeredContainer{
+  width: 100%;
+  display:flex;
+  justify-content: center;
+}
+.rightDiv{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 100%;
+}
+div.App, div#root{
+  height: 100%;
+}
+.content{
+  min-height: 66.34vh;
+}
+div.footer{
+  width: 100%;
+  bottom: 0;
+  box-sizing: border-box;
+}

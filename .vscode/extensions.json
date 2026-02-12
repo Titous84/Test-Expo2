@@ -1,0 +1,11 @@
+{
+    "recommendations": [
+        "devsense.phptools-vscode",
+        "orta.vscode-jest",
+        "emallin.phpunit",
+        "vitest.explorer",
+        "xdebug.php-debug",
+        "devsense.profiler-php-vscode",
+        "pwarchol.vscode-php-file-link"
+    ]
+}

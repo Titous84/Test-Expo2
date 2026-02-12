@@ -1,0 +1,12 @@
+{% include './Emails/Components/Header.html.twig' %}
+<tr>
+    <td style="padding:0 0 6px 0;color:#153643;text-align: center;">
+        <h1 style="font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;">Envoie de notes</h1>
+        <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">Bonjour {{name_ressource_person}},</p>
+        <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">
+            L'équipe {{team_name}} a eu pour note finale {{note}}
+        </p>
+        <br>   
+    </td>
+</tr>
+{% include './Emails/Components/Footer.html.twig' %}

@@ -1,0 +1,14 @@
+.idea/
+/.phpunit.result.cache
+build
+front/cypress/videos
+front/cypress/screenshots
+.DS_Store
+**/.DS_Store
+**/.env
+**/.env.*
+!**/.env.example
+front/dist/*
+/node_modules
+.history/
+.vite/

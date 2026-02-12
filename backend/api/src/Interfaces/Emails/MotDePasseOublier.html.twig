@@ -1,0 +1,16 @@
+{% include './Emails/Components/Header.html.twig' %}
+<tr>
+    <td style="padding:0 0 6px 0;color:#153643;text-align: center;">
+        <h1 style="font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;">Réinitialisation de  votre mot de passe</h1>
+        <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">Bonjour {{name}},</p>
+        <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">
+            Votre code de Vérification est:
+        </p>
+        <h1 style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;color:#000FFF;"><a href={{url}}>{{codeVerification}}</a></h1>
+        <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">
+            Si vous n'avez pas demander de changement de mot de passe. Veillez contacter le support d'Expo-Sat.
+        </p>
+        <br>
+    </td>
+</tr>
+{% include './Emails/Components/Footer.html.twig' %}

@@ -1,0 +1,14 @@
+.center {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+}
+h1.title {
+    font-size: 40px;
+}
+/*Rend la div responsive à l'écran*/
+div.screenHeight {
+    min-height: 100%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
