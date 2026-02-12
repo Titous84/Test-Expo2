@@ -71,6 +71,24 @@ export default function AdministratorsTable() {
 
     return (
         <div data-testid="administratorsTable">
+            {/* Réinitialisation annuelle des données événementielles. */}
+            {/* @author Nathan Reyes */}
+            <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
+                <Button
+                    variant="contained"
+                    color="warning"
+                    disabled={isResetLoading}
+                    onClick={() => {
+                        const confirmation = window.confirm("Êtes-vous certain de vouloir réinitialiser les données de l'événement? Cette action est irréversible.")
+                        if (confirmation) {
+                            resetEventData()
+                        }
+                    }}
+                >
+                    Réinitialiser les données de fin d'événement
+                </Button>
+            </Box>
+
             {/* Le tableau */}
             <DataGrid
                 rows={administratorsList}
